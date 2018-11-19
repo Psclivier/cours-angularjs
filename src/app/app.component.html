@@ -3,9 +3,12 @@
   <div class="row">
     <div class="col-xs-12">
       <h2>Mes appareils</h2>
+      <!--Pipes-->
+      <p>Mis à jour : {{ lastUpdate | async | date: 'short' | lowercase }}</p>
       <ul class="list-group">
         <!--ngFor directive structurelle ngFor-->
-        <app-appareil  *ngFor="let appareil of appareils"
+        <app-appareil  *ngFor="let appareil of appareils; let i = index"
+                       [indexOsAppareil]="i"
                        [appareilName]="appareil.name"
                        [appareilStatus]="appareil.status"></app-appareil>
 
@@ -13,6 +16,7 @@
       <button class="btn btn-success"
               [disabled]="!isAuth"
               (click)="onAllumer()">Tout allumer</button>
+      <button class="btn btn-danger" (click)="onEteindre()">Tout éteindre</button>
     </div>
   </div>
 </div>
