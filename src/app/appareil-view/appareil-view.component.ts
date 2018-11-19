@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AppareilService} from '../services/appareil.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-appareil-view',
@@ -9,6 +10,7 @@ import {AppareilService} from '../services/appareil.service';
 export class AppareilViewComponent implements OnInit {
 
     appareils: any[];
+    appareilSubscribtion: Subscription;
 
     isAuth = false;
     //on crée un délai pour tester le pipe async
@@ -30,7 +32,12 @@ export class AppareilViewComponent implements OnInit {
         );
     }
     ngOnInit() {
-        this.appareils = this.appareilService.appareils;
+        this.appareilSubscribtion = this.appareilService.appareilSubject.subscribe(
+            (appareil: any[]) => {
+                this.appareils = appareil;
+            }
+        );
+        this.appareilService.emitAppareilSubject();
     }
     onAllumer() {
         this.appareilService.switchOnAll();
