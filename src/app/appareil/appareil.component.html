@@ -7,6 +7,7 @@
        <!--*ngIf="appareilStatus === 'éteint'"></div>-->
   <!--ngStyle directive par attribut-->
   <h4 [ngStyle]="{color: getColor()}">Appareil : {{ appareilName }} -- Statut : {{ getStatus() }}</h4>
+  <a [routerLink]="[id]">Détail</a>
   <!--Liaison à double sens-->
   <!--<input type="text" class="form-control" [(ngModel)]="appareilName">-->
   <button class="btn btn-success" (click)="onSwitchOn()" [disabled]="appareilStatus === 'allumé'">Allumer</button>
