@@ -27,14 +27,14 @@ export class NewUserComponent implements OnInit {
         hobbies: this.formBuilder.array([])
     });
   }
-  onSubmitForm(){
+  onSubmitForm() {
     const formValue = this.userForm.value;
     const newUser = new User(
         formValue['firstName'],
         formValue['lastName'],
         formValue['email'],
         formValue['drinkPreference'],
-        formValue['hobbies'] , formValue['hobbies'] : []
+        formValue['hobbies'] ? formValue['hobbies'] : []
     );
     this.userService.addUser(newUser);
     this.router.navigate(['/users']);
